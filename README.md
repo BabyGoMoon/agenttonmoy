@@ -1,30 +1,58 @@
-# Xbox UI mockup
+<!-- Profile Header -->
+<h1 align="center">👋 Hey, I’m <strong>Anik Hossen Tonmoy</strong></h1>
+<p align="center">
+  <em>UI/UX-minded developer • Building playful, 3D-flavored web experiences</em>
+</p>
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+<p align="center">
+  <!-- Social Badges -->
+  <a href="https://www.facebook.com/anik.hossen.tonmoy" target="_blank">
+    <img alt="Facebook" src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white">
+  </a>
+  <a href="https://www.instagram.com/tonnn.mooy" target="_blank">
+    <img alt="Instagram" src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white">
+  </a>
+  <a href="https://t.me/DMPH4NTOM" target="_blank">
+    <img alt="Telegram" src="https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white">
+  </a>
+</p>
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/snsulayman310-4130s-projects/v0-xbox-ui-mockup)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/mCGX0gSxDPj)
+---
 
-## Overview
+## 🎨 UI/UX + 3D Vibes
+- I love designing interfaces that feel **fast**, **clean**, and **usable**.
+- Experimenting with **Three.js** & **React Three Fiber** to add subtle 3D motion and depth.
+- Building ethical, **safe** security tools and recon utilities (strictly for authorized testing).
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+---
 
-## Deployment
+## 🧰 Tech Toolkit
+<p>
+  <!-- Core -->
+  <img src="https://skillicons.dev/icons?i=ts,js,react,next,tailwind,nodejs&theme=dark" />
+  <!-- Design + 3D -->
+  <img src="https://skillicons.dev/icons?i=figma,blender,threejs&theme=dark" />
+  <!-- Extras -->
+  <img src="https://skillicons.dev/icons?i=git,vercel&theme=dark" />
+</p>
 
-Your project is live at:
+> 3D-ish energy: 🧊 🧩 🛰️ 🔦 ✨
 
-**[https://vercel.com/snsulayman310-4130s-projects/v0-xbox-ui-mockup](https://vercel.com/snsulayman310-4130s-projects/v0-xbox-ui-mockup)**
+---
 
-## Build your app
+## 🚀 Featured: Agent Tonmoy (Tools)
+**Agent Tonmoy** is a Next.js toolkit with a dark hacker aesthetic and green accents.  
+It focuses on **passive** and **authorized-only** testing utilities.
 
-Continue building your app on:
+**Highlights**
+- Subdomain Finder (crt.sh / BufferOver; VT/SecurityTrails optional)
+- XSS Payload Generator + Safe same-origin preview
+- Open Redirect variants (copyable links, no cross-origin requests)
+- LFI checker (single request, timeboxed)
+- Custom SQLi payload builder (signals only)
+- WHOIS, DNS Scanner, HTTP Headers
 
-**[https://v0.app/chat/projects/mCGX0gSxDPj](https://v0.app/chat/projects/mCGX0gSxDPj)**
-
-## How It Works
-
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+**Quick Start**
+```bash
+npm install
+npm run dev
