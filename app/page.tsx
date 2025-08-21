@@ -92,40 +92,40 @@ export default function AgentTonmoy() {
     >
       <MatrixBackground />
 
-      <div className="relative z-10 p-6">
+      <div className="relative z-10 p-2 sm:p-4 lg:p-6">
         {/* Main Container with sleek frame */}
         <div className="mx-auto max-w-7xl">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-700 via-gray-600 to-gray-500 p-1 shadow-2xl">
+          <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-gray-700 via-gray-600 to-gray-500 p-0.5 sm:p-1 shadow-2xl">
             {/* Top notch area */}
-            <div className="flex justify-between items-center px-8 py-4">
-              <div className="w-32"></div>
+            <div className="flex justify-between items-center px-4 sm:px-8 py-2 sm:py-4">
+              <div className="w-16 sm:w-32"></div>
               <div className="flex items-center gap-2">
-                <div className="w-16 h-6 bg-black rounded-full flex items-center justify-center">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
+                <div className="w-12 sm:w-16 h-4 sm:h-6 bg-black rounded-full flex items-center justify-center">
+                  <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-gray-600 rounded-full"></div>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Badge className="bg-green-600 hover:bg-green-700 text-black font-bold">AGENT</Badge>
-                <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center">
-                  <div className="w-3 h-3 text-black font-bold">T</div>
+              <div className="flex items-center gap-1 sm:gap-2">
+                <Badge className="bg-green-600 hover:bg-green-700 text-black font-bold text-xs sm:text-sm px-2 sm:px-3">
+                  AGENT
+                </Badge>
+                <div className="w-5 sm:w-6 h-5 sm:h-6 bg-green-600 rounded-full flex items-center justify-center">
+                  <div className="text-black font-bold text-xs sm:text-sm">T</div>
                 </div>
               </div>
             </div>
 
             {/* Main content area */}
-            <div className="flex min-h-[700px] bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-2xl mx-2 mb-2">
-              {/* Left Sidebar */}
-              <div className="w-20 flex flex-col items-center py-6 space-y-4">
+            <div className="flex min-h-[600px] sm:min-h-[700px] bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-xl sm:rounded-2xl mx-1 sm:mx-2 mb-1 sm:mb-2">
+              <div className="hidden sm:flex w-12 lg:w-20 flex-col items-center py-4 lg:py-6 space-y-2 lg:space-y-4">
                 {/* Agent Tonmoy Logo */}
-                <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mb-4">
-                  <span className="text-black font-bold text-lg">🐛</span>
+                <div className="w-8 lg:w-12 h-8 lg:h-12 bg-green-600 rounded-full flex items-center justify-center mb-2 lg:mb-4">
+                  <span className="text-black font-bold text-sm lg:text-lg">🐛</span>
                 </div>
 
-                {/* Navigation Icons */}
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="w-10 h-10 rounded-full bg-gray-700/50 hover:bg-green-600/20 border border-green-600/30"
+                  className="w-8 lg:w-10 h-8 lg:h-10 rounded-full bg-gray-700/50 hover:bg-green-600/20 border border-green-600/30"
                 >
                   <span className="text-green-400">🏠</span>
                 </Button>
@@ -133,7 +133,7 @@ export default function AgentTonmoy() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="w-10 h-10 rounded-full bg-gray-700/50 hover:bg-green-600/20 border border-green-600/30"
+                  className="w-8 lg:w-10 h-8 lg:h-10 rounded-full bg-gray-700/50 hover:bg-green-600/20 border border-green-600/30"
                 >
                   <span className="text-green-400">🌐</span>
                 </Button>
@@ -141,7 +141,7 @@ export default function AgentTonmoy() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="w-10 h-10 rounded-full bg-gray-700/50 hover:bg-green-600/20 border border-green-600/30"
+                  className="w-8 lg:w-10 h-8 lg:h-10 rounded-full bg-gray-700/50 hover:bg-green-600/20 border border-green-600/30"
                 >
                   <span className="text-green-400">🛡️</span>
                 </Button>
@@ -149,7 +149,7 @@ export default function AgentTonmoy() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="w-10 h-10 rounded-full bg-gray-700/50 hover:bg-green-600/20 border border-green-600/30"
+                  className="w-8 lg:w-10 h-8 lg:h-10 rounded-full bg-gray-700/50 hover:bg-green-600/20 border border-green-600/30"
                 >
                   <span className="text-green-400">💾</span>
                 </Button>
@@ -164,43 +164,44 @@ export default function AgentTonmoy() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="w-10 h-10 rounded-full bg-gray-700/50 hover:bg-green-600/20 border border-green-600/30"
+                  className="w-8 lg:w-10 h-8 lg:h-10 rounded-full bg-gray-700/50 hover:bg-green-600/20 border border-green-600/30"
                 >
-                  <span className="text-green-400">🔍</span>
+                  <span className="text-green-400 text-sm lg:text-base">🔍</span>
                 </Button>
               </div>
 
-              {/* Main Content */}
-              <div className="flex-1 p-8 relative overflow-y-auto">
+              <div className="flex-1 p-4 sm:p-6 lg:p-8 relative overflow-y-auto">
                 {/* Hero Section */}
-                <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center mb-8 lg:mb-16">
                   {/* Left Column - Text */}
-                  <div className="space-y-6">
-                    <div className="space-y-4">
-                      <h1 className="text-5xl lg:text-6xl font-bold text-green-400 tracking-tight">AGENT TONMOY</h1>
-                      <p className="text-xl text-green-300 font-medium">
+                  <div className="space-y-4 lg:space-y-6 text-center lg:text-left">
+                    <div className="space-y-2 lg:space-y-4">
+                      <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-green-400 tracking-tight">
+                        AGENT TONMOY
+                      </h1>
+                      <p className="text-base sm:text-lg lg:text-xl text-green-300 font-medium px-2 lg:px-0">
                         Free powerful bug hunting tools, ethical & authorized only.
                       </p>
                     </div>
 
-                    <div className="mb-6">
+                    <div className="mb-4 lg:mb-6">
                       <SearchBar onSearch={handleSearch} />
                     </div>
 
                     <Button
                       onClick={scrollToTools}
-                      className="bg-green-600 hover:bg-green-700 text-black font-bold px-8 py-3 rounded-full text-lg"
+                      className="bg-green-600 hover:bg-green-700 text-black font-bold px-6 lg:px-8 py-2 lg:py-3 rounded-full text-base lg:text-lg"
                     >
                       Start Hunting →
                     </Button>
                   </div>
 
-                  <div className="h-80 lg:h-96 rounded-xl p-4 bg-gray-800/30 flex items-center justify-center relative overflow-hidden border border-green-600/30">
+                  <div className="h-60 sm:h-80 lg:h-96 rounded-xl p-4 bg-gray-800/30 flex items-center justify-center relative overflow-hidden border border-green-600/30 order-first lg:order-last">
                     <div className="absolute inset-0 bg-gradient-to-br from-green-600/10 to-transparent"></div>
                     <div className="text-center relative z-10">
-                      <div className="text-6xl mb-4 animate-pulse">🤖</div>
-                      <p className="text-green-400 font-bold text-lg">MATRIX AGENT</p>
-                      <p className="text-green-500/70 text-sm mt-2">Ethical Hacking Protocol</p>
+                      <div className="text-4xl sm:text-5xl lg:text-6xl mb-2 lg:mb-4 animate-pulse">🤖</div>
+                      <p className="text-green-400 font-bold text-base lg:text-lg">MATRIX AGENT</p>
+                      <p className="text-green-500/70 text-xs sm:text-sm mt-1 lg:mt-2">Ethical Hacking Protocol</p>
                     </div>
                     {/* Matrix-style overlay */}
                     <div className="absolute inset-0 opacity-30">
@@ -210,13 +211,15 @@ export default function AgentTonmoy() {
                 </div>
 
                 {/* Tools Section */}
-                <div id="tools" className="space-y-8">
-                  <div className="text-center space-y-4">
-                    <h2 className="text-3xl font-bold text-green-400">Security Arsenal</h2>
-                    <p className="text-green-300">Professional bug hunting tools for ethical security research</p>
+                <div id="tools" className="space-y-6 lg:space-y-8">
+                  <div className="text-center space-y-2 lg:space-y-4">
+                    <h2 className="text-2xl lg:text-3xl font-bold text-green-400">Security Arsenal</h2>
+                    <p className="text-green-300 text-sm lg:text-base px-4 lg:px-0">
+                      Professional bug hunting tools for ethical security research
+                    </p>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                     {tools.map((tool, index) => (
                       <GlowCard
                         key={index}
@@ -224,17 +227,19 @@ export default function AgentTonmoy() {
                         customSize={true}
                         className="cursor-pointer group bg-gray-800/50 border-green-600/30 hover:border-green-500 transition-all duration-300"
                       >
-                        <div className="space-y-4 h-full flex flex-col">
+                        <div className="space-y-3 lg:space-y-4 h-full flex flex-col p-4 lg:p-6">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-green-600/20 rounded-lg flex items-center justify-center group-hover:bg-green-600/30 transition-colors">
-                              <span className="text-green-400 text-lg">{tool.icon}</span>
+                            <div className="w-8 lg:w-10 h-8 lg:h-10 bg-green-600/20 rounded-lg flex items-center justify-center group-hover:bg-green-600/30 transition-colors">
+                              <span className="text-green-400 text-base lg:text-lg">{tool.icon}</span>
                             </div>
-                            <h3 className="text-lg font-bold text-green-400 group-hover:text-green-300">{tool.name}</h3>
+                            <h3 className="text-base lg:text-lg font-bold text-green-400 group-hover:text-green-300">
+                              {tool.name}
+                            </h3>
                           </div>
-                          <p className="text-sm text-gray-400 flex-1">{tool.description}</p>
+                          <p className="text-xs lg:text-sm text-gray-400 flex-1">{tool.description}</p>
                           <Link href={tool.href} className="mt-auto">
                             <Button
-                              className="w-full bg-green-600/10 hover:bg-green-600/20 text-green-400 border border-green-600/30"
+                              className="w-full bg-green-600/10 hover:bg-green-600/20 text-green-400 border border-green-600/30 text-xs lg:text-sm"
                               variant="outline"
                             >
                               Open Tool
@@ -246,12 +251,11 @@ export default function AgentTonmoy() {
                   </div>
                 </div>
 
-                {/* Disclaimer Banner */}
-                <div className="mt-12">
-                  <Card className="bg-red-900/20 border-red-600/50 p-4">
-                    <div className="flex items-center gap-3">
-                      <span className="text-red-400 text-xl">🛡️</span>
-                      <p className="text-red-300 text-sm font-medium">
+                <div className="mt-8 lg:mt-12">
+                  <Card className="bg-red-900/20 border-red-600/50 p-3 lg:p-4">
+                    <div className="flex items-start sm:items-center gap-3">
+                      <span className="text-red-400 text-lg lg:text-xl flex-shrink-0">🛡️</span>
+                      <p className="text-red-300 text-xs sm:text-sm font-medium">
                         <strong>Educational / Authorized use only.</strong> Always ensure you have explicit permission
                         before testing any target. Unauthorized testing is illegal and unethical.
                       </p>
