@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Copy, Download, ExternalLink, CheckCircle } from "lucide-react"
 import { toast } from "react-hot-toast"
@@ -78,42 +77,20 @@ export default function ResultsDisplay({ results, title, isLoading, onExport }: 
 
           {results.length > 0 && (
             <div className="flex gap-2">
-              <Button
-                onClick={copyAllResults}
-                variant="outline"
-                size="sm"
-                className="text-green-400 border-green-600/30 hover:bg-green-600/10 font-body bg-transparent"
-              >
-                <Copy className="w-4 h-4 mr-2" />
-                Copy All
-              </Button>
+              <button onClick={copyAllResults} className="fat-btn text-sm px-3 py-1 flex items-center gap-2">
+                <Copy className="w-4 h-4" /> Copy All
+              </button>
               {onExport && (
-                <div className="flex gap-1">
-                  <Button
-                    onClick={() => onExport("txt")}
-                    variant="outline"
-                    size="sm"
-                    className="text-green-400 border-green-600/30 hover:bg-green-600/10 font-body"
-                  >
-                    <Download className="w-4 h-4 mr-1" />
-                    TXT
-                  </Button>
-                  <Button
-                    onClick={() => onExport("json")}
-                    variant="outline"
-                    size="sm"
-                    className="text-green-400 border-green-600/30 hover:bg-green-600/10 font-body"
-                  >
+                <div className="flex gap-2">
+                  <button onClick={() => onExport("txt")} className="fat-btn text-sm px-3 py-1 flex items-center gap-1">
+                    <Download className="w-4 h-4" /> TXT
+                  </button>
+                  <button onClick={() => onExport("json")} className="fat-btn text-sm px-3 py-1">
                     JSON
-                  </Button>
-                  <Button
-                    onClick={() => onExport("csv")}
-                    variant="outline"
-                    size="sm"
-                    className="text-green-400 border-green-600/30 hover:bg-green-600/10 font-body"
-                  >
+                  </button>
+                  <button onClick={() => onExport("csv")} className="fat-btn text-sm px-3 py-1">
                     CSV
-                  </Button>
+                  </button>
                 </div>
               )}
             </div>
@@ -145,22 +122,18 @@ export default function ResultsDisplay({ results, title, isLoading, onExport }: 
                   )}
                 </div>
                 <div className="flex gap-2 ml-3">
-                  <Button
+                  <button
                     onClick={() => copyToClipboard(result.value, result.id)}
-                    variant="ghost"
-                    size="sm"
-                    className="text-green-400 hover:bg-green-600/10"
+                    className="fat-btn text-xs px-2 py-1"
                   >
                     {copiedId === result.id ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                  </Button>
-                  <Button
+                  </button>
+                  <button
                     onClick={() => window.open(`https://${result.value}`, "_blank")}
-                    variant="ghost"
-                    size="sm"
-                    className="text-green-400 hover:bg-green-600/10"
+                    className="fat-btn text-xs px-2 py-1"
                   >
                     <ExternalLink className="w-4 h-4" />
-                  </Button>
+                  </button>
                 </div>
               </div>
             ))}
