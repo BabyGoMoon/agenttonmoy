@@ -4,8 +4,7 @@ import Link from "next/link"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-// ❌ remove GlowCard import
-// import { GlowCard } from "@/components/ui/spotlight-card"
+import CyberCard from "@/components/ui/CyberCard"   // ✅ use the Uiverse card
 import { SearchBar } from "@/components/ui/search-bar"
 import MatrixBackground from "@/components/MatrixBackground"
 
@@ -68,6 +67,7 @@ export default function AgentTonmoy() {
             </div>
 
             <div className="flex min-h-[600px] sm:min-h-[700px] bg-gradient-to-br from-gray-800 via-gray-900 to-black rounded-xl sm:rounded-2xl mx-1 sm:mx-2 mb-1 sm:mb-2">
+              {/* left rail */}
               <div className="hidden sm:flex w-12 lg:w-20 flex-col items-center py-4 lg:py-6 space-y-2 lg:space-y-4">
                 <div className="w-8 lg:w-12 h-8 lg:h-12 bg-green-600 rounded-full flex items-center justify-center mb-2 lg:mb-4">
                   <span className="text-black font-bold text-sm lg:text-lg">🐛</span>
@@ -98,7 +98,7 @@ export default function AgentTonmoy() {
               </div>
 
               <div className="flex-1 p-4 sm:p-6 lg:p-8 relative overflow-y-auto">
-                {/* Hero Section */}
+                {/* Hero */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center mb-8 lg:mb-16">
                   <div className="space-y-4 lg:space-y-6 text-center lg:text-left">
                     <div className="space-y-2 lg:space-y-4">
@@ -145,37 +145,22 @@ export default function AgentTonmoy() {
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-                    {tools.map((tool, index) => (
-                      <Card
-                        key={index}
-                        className="tool-card cursor-pointer group p-4 lg:p-6"
-                      >
-                        <div className="space-y-3 lg:space-y-4 h-full flex flex-col">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 lg:w-10 h-8 lg:h-10 bg-green-600/20 rounded-lg flex items-center justify-center group-hover:bg-green-600/30 transition-colors">
-                              <span className="text-green-400 text-base lg:text-lg">{tool.icon}</span>
-                            </div>
-                            <h3 className="text-base lg:text-lg font-bold text-green-400 group-hover:text-green-300">
-                              {tool.name}
-                            </h3>
-                          </div>
-                          <p className="text-xs lg:text-sm text-gray-400 flex-1">{tool.description}</p>
-                          <Link href={tool.href} className="mt-auto">
-                            <Button
-                              className="w-full bg-green-600/10 hover:bg-green-600/20 text-green-400 border border-green-600/30 text-xs lg:text-sm"
-                              variant="outline"
-                            >
-                              Open Tool
-                            </Button>
-                          </Link>
-                        </div>
-                      </Card>
+                    {tools.map((tool) => (
+                      <CyberCard
+                        key={tool.href}
+                        title={tool.name}
+                        subtitle={tool.description}
+                        href={tool.href}
+                        icon={tool.icon}
+                        className="mx-auto"
+                      />
                     ))}
                   </div>
                 </div>
 
+                {/* warning banner keeps the normal Card */}
                 <div className="mt-8 lg:mt-12">
-                  <Card className="tool-card bg-red-900/20 p-3 lg:p-4">
+                  <Card className="bg-red-900/20 border border-red-600/50 p-3 lg:p-4 rounded-2xl">
                     <div className="flex items-start sm:items-center gap-3">
                       <span className="text-red-400 text-lg lg:text-xl flex-shrink-0">🛡️</span>
                       <p className="text-red-300 text-xs sm:text-sm font-medium">
