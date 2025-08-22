@@ -97,17 +97,13 @@ export default function SafetyGuards({
         />
       ))}
 
+      {/* Uiverse fat-eagle-24 style button (requires .fat-btn CSS in globals.css) */}
       <button
         type="button"
         disabled={!allChecked || !!isLoading}
         aria-disabled={!allChecked || !!isLoading}
         onClick={() => allChecked && onConfirm()}
-        className={[
-          "mt-2 w-full rounded-xl px-4 py-3 text-sm font-medium transition",
-          allChecked && !isLoading
-            ? "bg-emerald-500 text-black shadow-[0_0_0_1px_rgba(16,185,129,.35),0_8px_28px_rgba(16,185,129,.35)] hover:opacity-95"
-            : "cursor-not-allowed bg-white/10 text-white/50",
-        ].join(" ")}
+        className="fat-btn mt-2 w-full"
       >
         I Confirm — Proceed with Tool
       </button>
@@ -119,3 +115,4 @@ export default function SafetyGuards({
     </div>
   );
 }
+
