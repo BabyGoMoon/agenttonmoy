@@ -728,3 +728,80 @@ body[data-intro-active] { overflow: hidden; }
   50%  { transform: rotateX(180deg) rotateY(180deg) scale(1.05); }
   100% { transform: rotateX(360deg) rotateY(360deg) scale(1); }
 }
+
+/* === Intro Splash Loader (full-screen, always on top) ================== */
+body[data-intro-active] { overflow: hidden; }
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: grid;
+  place-items: center;
+  pointer-events: all;
+  z-index: 2147483647; /* max-ish */
+  isolation: isolate;
+}
+
+.intro-overlay.fade-out {
+  animation: introFade 320ms ease forwards;
+}
+@keyframes introFade { to { opacity: 0; visibility: hidden; } }
+
+/* Cube styles (scoped) */
+.intro-scene {
+  perspective: 800px;
+  --face-bg: rgba(22, 27, 23, 0.9);
+  --border-color: rgba(1, 206, 8, 0.9);
+  --box-shadow-color: rgba(8, 254, 0, 0.6);
+  --filter-shadow-color: rgba(26, 255, 0, 0.5);
+  --svg-shadow-color: rgba(17, 255, 0, 0.4);
+}
+
+.intro-spinner {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform-origin: center;
+  animation: introRotateCube 6s infinite ease-in-out;
+}
+
+.intro-face {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: var(--face-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--border-color);
+  box-shadow: 0 0 12px var(--box-shadow-color);
+  filter: drop-shadow(0px 0px 6px var(--filter-shadow-color));
+}
+
+.intro-face svg {
+  width: 80px;
+  height: 80px;
+  opacity: 0.9;
+  filter: drop-shadow(0px 0px 12px var(--svg-shadow-color));
+}
+
+.intro-face.front  { transform: translateZ(50px); }
+.intro-face.back   { transform: rotateY(180deg) translateZ(50px); }
+.intro-face.left   { transform: rotateY(-90deg) translateZ(50px); }
+.intro-face.right  { transform: rotateY( 90deg) translateZ(50px); }
+.intro-face.top    { transform: rotateX( 90deg) translateZ(50px); }
+.intro-face.bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+@keyframes introRotateCube {
+  0%   { transform: rotateX(0deg) rotateY(0deg) scale(1); }
+  50%  { transform: rotateX(180deg) rotateY(180deg) scale(1.05); }
+  100% { transform: rotateX(360deg) rotateY(360deg) scale(1); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .intro-spinner { animation: none; }
+  .intro-overlay.fade-out { animation-duration: 1ms; }
+}
