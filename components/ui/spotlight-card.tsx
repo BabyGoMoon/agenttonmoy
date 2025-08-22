@@ -1,16 +1,74 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useEffect, useRef, type ReactNode } from "react"
+import * as React from "react";
+
+/* -------------------------------------------------------
+   Uiverse 'cowardly-eagle-56' styled Card (site-wide)
+   ------------------------------------------------------- */
+
+function cx(...parts: Array<string | false | null | undefined>) {
+  return parts.filter(Boolean).join(" ");
+}
+
+const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cx(
+        // Base look; .tool-card class is styled in globals.css
+        "tool-card rounded-2xl p-6 transition-transform duration-200",
+        className
+      )}
+      {...props}
+    />
+  )
+);
+Card.displayName = "Card";
+
+const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => <div ref={ref} className={cx("mb-4", className)} {...props} />
+);
+CardHeader.displayName = "CardHeader";
+
+const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
+  ({ className, ...props }, ref) => (
+    <h3 ref={ref} className={cx("text-xl font-semibold tracking-tight text-green-400", className)} {...props} />
+  )
+);
+CardTitle.displayName = "CardTitle";
+
+const CardDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
+  ({ className, ...props }, ref) => (
+    <p ref={ref} className={cx("text-sm text-gray-400", className)} {...props} />
+  )
+);
+CardDescription.displayName = "CardDescription";
+
+const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => <div ref={ref} className={cx("mt-2", className)} {...props} />
+);
+CardContent.displayName = "CardContent";
+
+const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => <div ref={ref} className={cx("mt-4", className)} {...props} />
+);
+CardFooter.displayName = "CardFooter";
+
+/* -------------------------------------------------------
+   Your original GlowCard kept as a separate export
+   (unchanged except for tiny TS cleanup)
+   ------------------------------------------------------- */
+
+import { useEffect, useRef } from "react";
 
 interface GlowCardProps {
-  children: ReactNode
-  className?: string
-  glowColor?: "blue" | "purple" | "green" | "red" | "orange"
-  size?: "sm" | "md" | "lg"
-  width?: string | number
-  height?: string | number
-  customSize?: boolean // When true, ignores size prop and uses width/height or className
+  children: React.ReactNode;
+  className?: string;
+  glowColor?: "blue" | "purple" | "green" | "red" | "orange";
+  size?: "sm" | "md" | "lg";
+  width?: string | number;
+  height?: string | number;
+  customSize?: boolean;
 }
 
 const glowColorMap = {
@@ -19,13 +77,13 @@ const glowColorMap = {
   green: { base: 120, spread: 200 },
   red: { base: 0, spread: 200 },
   orange: { base: 30, spread: 200 },
-}
+};
 
 const sizeMap = {
   sm: "w-48 h-64",
   md: "w-64 h-80",
   lg: "w-80 h-96",
-}
+};
 
 const GlowCard: React.FC<GlowCardProps> = ({
   children,
@@ -36,39 +94,36 @@ const GlowCard: React.FC<GlowCardProps> = ({
   height,
   customSize = false,
 }) => {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const innerRef = useRef<HTMLDivElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const syncPointer = (e: PointerEvent) => {
-      const { clientX: x, clientY: y } = e
+      const { clientX: x, clientY: y } = e;
 
       if (cardRef.current) {
-        cardRef.current.style.setProperty("--x", x.toFixed(2))
-        cardRef.current.style.setProperty("--xp", (x / window.innerWidth).toFixed(2))
-        cardRef.current.style.setProperty("--y", y.toFixed(2))
-        cardRef.current.style.setProperty("--yp", (y / window.innerHeight).toFixed(2))
+        cardRef.current.style.setProperty("--x", x.toFixed(2));
+        cardRef.current.style.setProperty("--xp", (x / window.innerWidth).toFixed(2));
+        cardRef.current.style.setProperty("--y", y.toFixed(2));
+        cardRef.current.style.setProperty("--yp", (y / window.innerHeight).toFixed(2));
       }
-    }
+    };
 
-    document.addEventListener("pointermove", syncPointer)
-    return () => document.removeEventListener("pointermove", syncPointer)
-  }, [])
+    document.addEventListener("pointermove", syncPointer);
+    return () => document.removeEventListener("pointermove", syncPointer);
+  }, []);
 
-  const { base, spread } = glowColorMap[glowColor]
+  const { base, spread } = glowColorMap[glowColor];
 
-  // Determine sizing
   const getSizeClasses = () => {
-    if (customSize) {
-      return "" // Let className or inline styles handle sizing
-    }
-    return sizeMap[size]
-  }
+    if (customSize) return "";
+    return sizeMap[size];
+  };
 
-  const getInlineStyles = () => {
-    const baseStyles = {
-      "--base": base,
-      "--spread": spread,
+  const getInlineStyles = (): React.CSSProperties & Record<string, string> => {
+    const baseStyles: any = {
+      "--base": String(base),
+      "--spread": String(spread),
       "--radius": "14",
       "--border": "3",
       "--backdrop": "hsl(0 0% 60% / 0.12)",
@@ -89,20 +144,15 @@ const GlowCard: React.FC<GlowCardProps> = ({
       backgroundPosition: "50% 50%",
       backgroundAttachment: "fixed",
       border: "var(--border-size) solid var(--backup-border)",
-      position: "relative" as const,
-      touchAction: "none" as const,
-    }
+      position: "relative",
+      touchAction: "none",
+    };
 
-    // Add width and height if provided
-    if (width !== undefined) {
-      baseStyles.width = typeof width === "number" ? `${width}px` : width
-    }
-    if (height !== undefined) {
-      baseStyles.height = typeof height === "number" ? `${height}px` : height
-    }
+    if (width !== undefined) baseStyles.width = typeof width === "number" ? `${width}px` : width;
+    if (height !== undefined) baseStyles.height = typeof height === "number" ? `${height}px` : height;
 
-    return baseStyles
-  }
+    return baseStyles;
+  };
 
   const beforeAfterStyles = `
     [data-glow]::before,
@@ -121,7 +171,6 @@ const GlowCard: React.FC<GlowCardProps> = ({
       mask-clip: padding-box, border-box;
       mask-composite: intersect;
     }
-    
     [data-glow]::before {
       background-image: radial-gradient(
         calc(var(--spotlight-size) * 0.75) calc(var(--spotlight-size) * 0.75) at
@@ -131,7 +180,6 @@ const GlowCard: React.FC<GlowCardProps> = ({
       );
       filter: brightness(2);
     }
-    
     [data-glow]::after {
       background-image: radial-gradient(
         calc(var(--spotlight-size) * 0.5) calc(var(--spotlight-size) * 0.5) at
@@ -140,7 +188,6 @@ const GlowCard: React.FC<GlowCardProps> = ({
         hsl(0 100% 100% / var(--border-light-opacity, 1)), transparent 100%
       );
     }
-    
     [data-glow] [data-glow] {
       position: absolute;
       inset: 0;
@@ -153,12 +200,11 @@ const GlowCard: React.FC<GlowCardProps> = ({
       pointer-events: none;
       border: none;
     }
-    
     [data-glow] > [data-glow]::before {
       inset: -10px;
       border-width: 10px;
     }
-  `
+  `;
 
   return (
     <>
@@ -167,25 +213,19 @@ const GlowCard: React.FC<GlowCardProps> = ({
         ref={cardRef}
         data-glow
         style={getInlineStyles()}
-        className={`
-          ${getSizeClasses()}
-          ${!customSize ? "aspect-[3/4]" : ""}
-          rounded-2xl 
-          relative 
-          grid 
-          grid-rows-[1fr_auto] 
-          shadow-[0_1rem_2rem_-1rem_black] 
-          p-4 
-          gap-4 
-          backdrop-blur-[5px]
-          ${className}
-        `}
+        className={cx(
+          getSizeClasses(),
+          !customSize && "aspect-[3/4]",
+          "rounded-2xl relative grid grid-rows-[1fr_auto] shadow-[0_1rem_2rem_-1rem_black] p-4 gap-4 backdrop-blur-[5px]",
+          className
+        )}
       >
         <div ref={innerRef} data-glow></div>
         {children}
       </div>
     </>
-  )
-}
+  );
+};
 
-export { GlowCard }
+/* Exports */
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, GlowCard };
