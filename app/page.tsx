@@ -1,13 +1,14 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import CyberCard from "@/components/ui/CyberCard"
-import { SearchBar } from "@/components/ui/search-bar"
-import MatrixBackground from "@/components/MatrixBackground"
-import MatrixFrameBG from "@/components/MatrixFrameBG" // ⬅️ inner-frame matrix rain
+import Link from "next/link";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import CyberCard from "@/components/ui/CyberCard";
+import { SearchBar } from "@/components/ui/search-bar";
+import MatrixBackground from "@/components/MatrixBackground";
+import MatrixFrameBG from "@/components/MatrixFrameBG"; // ⬅️ inner-frame matrix rain
+import GlitchButton from "@/components/ui/glitch-button"; // ⬅️ your glitch button component
 
 export default function AgentTonmoy() {
   const tools = [
@@ -20,16 +21,16 @@ export default function AgentTonmoy() {
     { name: "DNS Scanner", description: "Extended DNS record lookup", href: "/tools/dns-scanner", icon: "🔎" },
     { name: "HTTP Headers", description: "Inspect HTTP headers", href: "/tools/http-headers", icon: "📋" },
     { name: "Recon Hub", description: "Research tools & helpers", href: "/tools/recon-hub", icon: "🎯" },
-  ]
+  ];
 
   const scrollToTools = () => {
-    document.getElementById("tools")?.scrollIntoView({ behavior: "smooth" })
-  }
+    document.getElementById("tools")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const handleSearch = (query: string) => {
-    const match = tools.find((t) => t.name.toLowerCase().includes(query.toLowerCase()))
-    if (match) window.location.href = match.href
-  }
+    const match = tools.find((t) => t.name.toLowerCase().includes(query.toLowerCase()));
+    if (match) window.location.href = match.href;
+  };
 
   return (
     <div
@@ -123,12 +124,14 @@ export default function AgentTonmoy() {
                         <SearchBar onSearch={handleSearch} />
                       </div>
 
-                      <Button
+                      {/* Glitch Button (replacing the original one) */}
+                      <GlitchButton
                         onClick={scrollToTools}
-                        className="bg-green-600 hover:bg-green-700 text-black font-bold px-6 lg:px-8 py-2 lg:py-3 rounded-full text-base lg:text-lg"
+                        size="lg"
+                        className="mt-1"
                       >
                         Start Hunting →
-                      </Button>
+                      </GlitchButton>
                     </div>
 
                     <div className="h-60 sm:h-80 lg:h-96 rounded-xl p-4 bg-gray-800/30 flex items-center justify-center relative overflow-hidden border border-green-600/30 order-first lg:order-last">
@@ -186,5 +189,5 @@ export default function AgentTonmoy() {
         </div>
       </div>
     </div>
-  )
+  );
 }
