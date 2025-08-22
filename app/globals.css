@@ -934,3 +934,66 @@ body[data-intro-active] { overflow: hidden; }
   .mf-col { font-size: 12px; line-height: 14px; width: 15px; }
 }
 /* =================== End MatrixFrameBG =================== */
+
+/* ===== Glitch Button (scoped) ===== */
+.glitch-btn,
+.glitch-btn::after {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-share-tech-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #eafff7;
+  background: transparent;
+  border: 1px solid rgba(0, 255, 213, 0.75);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.glitch-btn {
+  border-radius: 9999px; /* pill by default */
+  box-shadow: 0 10px 20px -14px rgba(0, 255, 213, 0.6);
+}
+
+.glitch-btn::after {
+  /* dynamic label from data-text */
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 3px solid rgb(0, 255, 213);
+  border-radius: inherit;
+  clip-path: inset(50% 50% 50% 50%); /* hidden start */
+  pointer-events: none;
+}
+
+.glitch-btn:hover {
+  border-color: rgb(0, 255, 213);
+  box-shadow: 0 10px 20px -10px rgba(0, 255, 213, 0.65);
+  text-shadow: -1px -1px 0 #1df2f0, 1px 1px 0 #e94be8;
+}
+
+.glitch-btn:hover::after {
+  animation: glitch-4011 1s steps(2, end);
+  text-shadow: -3px -3px 0 #1df2f0, 3px 3px 0 #e94be8;
+  background: transparent;
+}
+
+/* keyframes from the Uiverse snippet */
+@keyframes glitch-4011 {
+  0%   { clip-path: inset(50% 50% 50% 50%); transform: translate(0, -10px); }
+  10%  { clip-path: inset(31% 0 40% 0);    transform: translate(-10px, 10px); }
+  20%  { clip-path: inset(39% 0 15% 0);    transform: translate(10px, 0); }
+  30%  { clip-path: inset(45% 0 40% 0);    transform: translate(-10px, 10px); }
+  40%  { clip-path: inset(45% 0 6% 0);     transform: translate(10px, -10px); }
+  50%  { clip-path: inset(14% 0 61% 0);    transform: translate(-10px, 10px); }
+  60%  { clip-path: inset(50% 50% 50% 50%); transform: translate(10px, -10px); }
+  70%  { clip-path: inset(39% 0 15% 0);    transform: translate(-10px, 10px); }
+  80%  { clip-path: inset(31% 0 40% 0);    transform: translate(10px, -10px); }
+  90%  { clip-path: inset(45% 0 40% 0);    transform: translate(-10px, 10px); }
+  100% { clip-path: inset(50% 50% 50% 50%); transform: translate(0, 0); }
+}
+
