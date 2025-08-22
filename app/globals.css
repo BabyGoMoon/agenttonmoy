@@ -997,3 +997,88 @@ body[data-intro-active] { overflow: hidden; }
   100% { clip-path: inset(50% 50% 50% 50%); transform: translate(0, 0); }
 }
 
+/* Social Card Popup Styles */
+
+/* Overlay for the popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure the overlay is above other content */
+}
+
+/* Social Card Popup container */
+.social-card-popup {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  z-index: 1001; /* Above the overlay */
+  animation: popupAnimation 0.3s ease-out;
+}
+
+/* Icon style */
+.card {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card svg {
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover svg {
+  transform: scale(1.2); /* Enlarge icon on hover */
+}
+
+/* Button for closing the popup */
+.close-button {
+  background: #ff6347;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+  background: #e03e28;
+}
+
+/* Popup animation */
+@keyframes popupAnimation {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
