@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,8 +10,19 @@ import { SearchBar } from "@/components/ui/search-bar";
 import MatrixBackground from "@/components/MatrixBackground";
 import MatrixFrameBG from "@/components/MatrixFrameBG"; // ⬅️ inner-frame matrix rain
 import GlitchButton from "@/components/ui/glitch-button"; // ⬅️ your glitch button component
+import SocialCardPopup from "@/components/ui/SocialCardPopup"; // Import the social card popup component
 
-export default function AgentTonmoy() {
+export default function HomePage() {
+  const [popupVisible, setPopupVisible] = useState(false); // State to manage popup visibility
+
+  const handlePopupOpen = () => {
+    setPopupVisible(true); // Open the popup
+  };
+
+  const handlePopupClose = () => {
+    setPopupVisible(false); // Close the popup
+  };
+
   const tools = [
     { name: "Subdomain Finder", description: "Discover subdomains passively", href: "/tools/subdomain", icon: "🔍" },
     { name: "XSS Scanner", description: "Safe XSS reflection testing", href: "/tools/xss-scanner", icon: "⚡" },
@@ -44,7 +56,7 @@ export default function AgentTonmoy() {
           rgb(59, 75, 51) 100%)`,
       }}
     >
-      {/* full-page matrix background (your existing component) */}
+      {/* full-page matrix background */}
       <MatrixBackground />
 
       <div className="relative z-10 p-2 sm:p-4 lg:p-6">
@@ -69,12 +81,11 @@ export default function AgentTonmoy() {
               </div>
             </div>
 
-            {/* inner panel (now clips the MatrixFrameBG) */}
+            {/* inner panel */}
             <div className="relative overflow-hidden min-h-[600px] sm:min-h-[700px] rounded-xl sm:rounded-2xl mx-1 sm:mx-2 mb-1 sm:mb-2 bg-gradient-to-br from-gray-800 via-gray-900 to-black">
               {/* animated matrix inside frame */}
               <MatrixFrameBG className="absolute inset-0 opacity-20 pointer-events-none" />
 
-              {/* content sits above animation */}
               <div className="relative z-10 flex">
                 {/* left rail */}
                 <aside className="hidden sm:flex w-12 lg:w-20 flex-col items-center py-4 lg:py-6 space-y-2 lg:space-y-4">
@@ -82,22 +93,15 @@ export default function AgentTonmoy() {
                     <span className="text-black font-bold text-sm lg:text-lg">🐛</span>
                   </div>
 
-                  <Button variant="ghost" size="icon" className="w-8 lg:w-10 h-8 lg:h-10 rounded-full bg-gray-700/50 hover:bg-green-600/20 border border-green-600/30">
-                    <span className="text-green-400">🏠</span>
+                  {/* Computer Icon Button */}
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="w-8 lg:w-10 h-8 lg:h-10 rounded-full bg-gray-700/50 hover:bg-green-600/20 border border-green-600/30"
+                    onClick={handlePopupOpen} // Opens the popup on click
+                  >
+                    <span className="text-green-400">💻</span>
                   </Button>
-                  <Button variant="ghost" size="icon" className="w-8 lg:w-10 h-8 lg:h-10 rounded-full bg-gray-700/50 hover:bg-green-600/20 border border-green-600/30">
-                    <span className="text-green-400">🌐</span>
-                  </Button>
-                  <Button variant="ghost" size="icon" className="w-8 lg:w-10 h-8 lg:h-10 rounded-full bg-gray-700/50 hover:bg-green-600/20 border border-green-600/30">
-                    <span className="text-green-400">🛡️</span>
-                  </Button>
-                  <Button variant="ghost" size="icon" className="w-8 lg:w-10 h-8 lg:h-10 rounded-full bg-gray-700/50 hover:bg-green-600/20 border border-green-600/30">
-                    <span className="text-green-400">💾</span>
-                  </Button>
-
-                  <div className="w-12 h-12 bg-green-600/20 rounded-full flex items-center justify-center mt-4 border border-green-600/50">
-                    <span className="text-green-400 text-lg">💻</span>
-                  </div>
 
                   <div className="flex-1" />
 
@@ -188,6 +192,9 @@ export default function AgentTonmoy() {
           </div>
         </div>
       </div>
+
+      {/* Social Card Popup */}
+      {popupVisible && <SocialCardPopup onClose={handlePopupClose} />}
     </div>
   );
 }
