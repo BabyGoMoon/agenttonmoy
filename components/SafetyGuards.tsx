@@ -1,109 +1,121 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Button } from "@/components/ui/button"
-import { AlertTriangle } from "lucide-react"
+import { useMemo, useState } from "react";
 
-interface SafetyGuardsProps {
-  onConfirm: () => void
-  isLoading?: boolean
-  toolName: string
+/* ---------- Neon Checkbox (shared) ---------- */
+function NeonCheckbox({
+  label,
+  checked,
+  onChange,
+}: {
+  label: string;
+  checked: boolean;
+  onChange: (v: boolean) => void;
+}) {
+  return (
+    <label className="relative flex w-full items-start gap-3">
+      {/* real (hidden) input for a11y */}
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.currentTarget.checked)}
+        className="peer sr-only"
+      />
+      {/* box */}
+      <span
+        className={[
+          "relative mt-[2px] h-[22px] w-[22px] flex-none rounded-md border",
+          "border-white/25 bg-white/5",
+          "shadow-[inset_0_0_0_2px_rgba(0,0,0,0.35),0_2px_12px_rgba(0,0,0,0.3)]",
+          "transition-all duration-200",
+          "peer-checked:border-emerald-500 peer-checked:bg-emerald-500/15",
+          "peer-checked:shadow-[0_0_0_2px_rgba(16,185,129,.25),0_6px_26px_rgba(16,185,129,.35)]",
+          "peer-hover:border-emerald-400/60",
+        ].join(" ")}
+      />
+      {/* checkmark */}
+      <svg
+        viewBox="0 0 24 24"
+        aria-hidden
+        className={[
+          "pointer-events-none absolute left-[3px] top-[3px] h-4 w-4",
+          "opacity-0 scale-75 transition-all duration-150",
+          "drop-shadow-[0_0_6px_rgba(16,185,129,.65)]",
+          "peer-checked:opacity-100 peer-checked:scale-100",
+        ].join(" ")}
+      >
+        <path
+          d="M5 13l4 4L19 7"
+          fill="none"
+          stroke="rgb(16,185,129)"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+
+      {/* text (wrap to next line naturally) */}
+      <span className="text-[0.95rem] leading-snug text-white/85">
+        {label}
+      </span>
+    </label>
+  );
 }
 
-export default function SafetyGuards({ onConfirm, isLoading, toolName }: SafetyGuardsProps) {
-  const [permissions, setPermissions] = useState({
-    authorized: false,
-    educational: false,
-    legal: false,
-    ethical: false,
-  })
-
-  const allChecked = Object.values(permissions).every(Boolean)
-
-  const handlePermissionChange = (key: keyof typeof permissions) => {
-    setPermissions((prev) => ({ ...prev, [key]: !prev[key] }))
-  }
-
-  const handleConfirm = () => {
-    if (allChecked) {
-      onConfirm()
-    }
-  }
+/* ---------- Shared SafetyGuards used by ALL tools ---------- */
+export default function SafetyGuards({
+  onConfirm,
+  isLoading,
+  toolName,
+  items = [
+    "I have explicit written authorization to test the target",
+    "This is for educational or authorized security research only",
+    "I understand that unauthorized testing is illegal",
+    "I will use this tool ethically and responsibly",
+  ],
+}: {
+  onConfirm: () => void;
+  isLoading?: boolean;
+  toolName: string;
+  items?: string[];
+}) {
+  const [checks, setChecks] = useState<boolean[]>(Array(items.length).fill(false));
+  const allChecked = useMemo(() => checks.every(Boolean), [checks]);
 
   return (
-    <Card className="bg-red-900/10 border-red-600/30 p-6 mb-6">
-      <div className="space-y-4">
-        <div className="flex items-center gap-3">
-          <AlertTriangle className="w-6 h-6 text-red-400" />
-          <h3 className="text-lg font-bold text-red-400 font-heading">Safety & Legal Requirements</h3>
-        </div>
+    <div className="flex flex-col gap-4">
+      {items.map((label, idx) => (
+        <NeonCheckbox
+          key={idx}
+          label={label}
+          checked={checks[idx]}
+          onChange={(v) => {
+            const next = [...checks];
+            next[idx] = v;
+            setChecks(next);
+          }}
+        />
+      ))}
 
-        <p className="text-red-300 text-sm font-body">
-          Before using {toolName}, you must confirm the following requirements:
-        </p>
+      <button
+        type="button"
+        disabled={!allChecked || !!isLoading}
+        aria-disabled={!allChecked || !!isLoading}
+        onClick={() => allChecked && onConfirm()}
+        className={[
+          "mt-2 w-full rounded-xl px-4 py-3 text-sm font-medium transition",
+          allChecked && !isLoading
+            ? "bg-emerald-500 text-black shadow-[0_0_0_1px_rgba(16,185,129,.35),0_8px_28px_rgba(16,185,129,.35)] hover:opacity-95"
+            : "cursor-not-allowed bg-white/10 text-white/50",
+        ].join(" ")}
+      >
+        I Confirm — Proceed with Tool
+      </button>
 
-        <div className="space-y-3">
-          <div className="flex items-center space-x-3">
-            <Checkbox
-              id="authorized"
-              checked={permissions.authorized}
-              onCheckedChange={() => handlePermissionChange("authorized")}
-              className="border-red-400 data-[state=checked]:bg-red-600"
-            />
-            <label htmlFor="authorized" className="text-sm text-red-300 font-body cursor-pointer">
-              I have explicit written authorization to test the target
-            </label>
-          </div>
-
-          <div className="flex items-center space-x-3">
-            <Checkbox
-              id="educational"
-              checked={permissions.educational}
-              onCheckedChange={() => handlePermissionChange("educational")}
-              className="border-red-400 data-[state=checked]:bg-red-600"
-            />
-            <label htmlFor="educational" className="text-sm text-red-300 font-body cursor-pointer">
-              This is for educational or authorized security research only
-            </label>
-          </div>
-
-          <div className="flex items-center space-x-3">
-            <Checkbox
-              id="legal"
-              checked={permissions.legal}
-              onCheckedChange={() => handlePermissionChange("legal")}
-              className="border-red-400 data-[state=checked]:bg-red-600"
-            />
-            <label htmlFor="legal" className="text-sm text-red-300 font-body cursor-pointer">
-              I understand that unauthorized testing is illegal
-            </label>
-          </div>
-
-          <div className="flex items-center space-x-3">
-            <Checkbox
-              id="ethical"
-              checked={permissions.ethical}
-              onCheckedChange={() => handlePermissionChange("ethical")}
-              className="border-red-400 data-[state=checked]:bg-red-600"
-            />
-            <label htmlFor="ethical" className="text-sm text-red-300 font-body cursor-pointer">
-              I will use this tool ethically and responsibly
-            </label>
-          </div>
-        </div>
-
-        <Button
-          onClick={handleConfirm}
-          disabled={!allChecked || isLoading}
-          className={`w-full font-body ${
-            allChecked ? "bg-green-600 hover:bg-green-700 text-black" : "bg-gray-600 text-gray-400 cursor-not-allowed"
-          }`}
-        >
-          {isLoading ? "Processing..." : "I Confirm - Proceed with Tool"}
-        </Button>
-      </div>
-    </Card>
-  )
+      <p className="text-xs text-white/50">
+        Safety &amp; Legal Requirements for{" "}
+        <span className="text-emerald-400">{toolName}</span>
+      </p>
+    </div>
+  );
 }
