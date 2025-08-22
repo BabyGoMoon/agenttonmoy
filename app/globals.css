@@ -365,3 +365,96 @@
 }
 .fat-btn--secondary:hover { box-shadow: 0 0 0 1px rgba(16,185,129,.5) inset, 0 14px 32px rgba(0,0,0,.4); }
 
+/* === Uiverse 'cowardly-eagle-56' inspired card === */
+.fancy-card {
+  --glow: rgba(16,185,129,.55);
+  --glow-soft: rgba(16,185,129,.25);
+  --bg1: rgba(12, 20, 18, .75);
+  --bg2: rgba(10, 14, 13, .85);
+  position: relative;
+  border-radius: 22px;
+  padding: 22px;
+  background:
+    radial-gradient(120% 120% at 0% 0%, rgba(34,197,94,.08), transparent 60%),
+    linear-gradient(180deg, var(--bg1), var(--bg2));
+  border: 1px solid rgba(255,255,255,.07);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.06) inset,
+    0 30px 60px rgba(0,0,0,.35);
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+  overflow: hidden;
+}
+
+.fancy-card::before {
+  /* moving soft glow border */
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 24px;
+  padding: 2px;
+  background:
+    linear-gradient(120deg, transparent 0%, var(--glow-soft) 40%, transparent 70%),
+    radial-gradient(60% 120% at 100% 0%, rgba(16,185,129,.18), transparent 60%);
+  -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.fancy-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(16,185,129,.35);
+  box-shadow:
+    0 0 0 1px rgba(16,185,129,.25) inset,
+    0 34px 70px rgba(16,185,129,.18),
+    0 30px 60px rgba(0,0,0,.45);
+}
+
+.fancy-card__head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.fancy-card__icon {
+  display: grid;
+  place-items: center;
+  height: 44px;
+  width: 44px;
+  border-radius: 12px;
+  background: radial-gradient(120% 120% at 30% 30%, rgba(16,185,129,.18), rgba(16,185,129,.05));
+  border: 1px solid rgba(16,185,129,.25);
+  box-shadow: 0 6px 18px rgba(16,185,129,.15) inset, 0 8px 18px rgba(0,0,0,.35);
+  color: rgb(16,185,129);
+}
+
+.fancy-card__title {
+  font-family: var(--font-heading, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: .02em;
+  color: #34f7b5;
+}
+
+.fancy-card__desc {
+  color: rgba(233,255,246,.8);
+  font-size: .9rem;
+  margin-top: .25rem;
+}
+
+.fancy-card__footer {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* make existing grid look good */
+.fancy-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+
