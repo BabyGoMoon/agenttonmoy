@@ -1,10 +1,7 @@
 "use client"
 
-import type React from "react"
-
 import type { ReactNode } from "react"
 import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -97,13 +94,15 @@ export default function ToolForm({ title, fields, onSubmit, isLoading, children 
 
         {children}
 
-        <Button
+        {/* Uiverse fat-eagle-24 button */}
+        <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-green-600 hover:bg-green-700 text-black font-bold font-body glow-green"
+          aria-disabled={isLoading}
+          className="fat-btn w-full"
         >
           {isLoading ? "Processing..." : "Run Scan"}
-        </Button>
+        </button>
       </form>
     </Card>
   )
