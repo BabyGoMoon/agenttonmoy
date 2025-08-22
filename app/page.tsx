@@ -1,26 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
+import { useState } from "react"; // Make sure to import useState hook
+import { Button } from "@/components/ui/button"; // Your button component
+import SocialCardPopup from "@/components/ui/SocialCardPopup"; // Import your SocialCardPopup component
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import CyberCard from "@/components/ui/CyberCard";
 import { SearchBar } from "@/components/ui/search-bar";
 import MatrixBackground from "@/components/MatrixBackground";
-import MatrixFrameBG from "@/components/MatrixFrameBG"; // ⬅️ inner-frame matrix rain
-import GlitchButton from "@/components/ui/glitch-button"; // ⬅️ your glitch button component
-import SocialCardPopup from "@/components/ui/SocialCardPopup"; // Import the social card popup component
+import MatrixFrameBG from "@/components/MatrixFrameBG";
+import GlitchButton from "@/components/ui/glitch-button"; 
 
 export default function HomePage() {
-  const [popupVisible, setPopupVisible] = useState(false); // State to manage popup visibility
+  // State for controlling the popup visibility
+  const [popupVisible, setPopupVisible] = useState(false);
 
+  // Open the popup
   const handlePopupOpen = () => {
-    setPopupVisible(true); // Open the popup
+    setPopupVisible(true);
   };
 
+  // Close the popup
   const handlePopupClose = () => {
-    setPopupVisible(false); // Close the popup
+    setPopupVisible(false);
   };
 
   const tools = [
@@ -128,7 +130,7 @@ export default function HomePage() {
                         <SearchBar onSearch={handleSearch} />
                       </div>
 
-                      {/* Glitch Button (replacing the original one) */}
+                      {/* Glitch Button */}
                       <GlitchButton
                         onClick={scrollToTools}
                         size="lg"
