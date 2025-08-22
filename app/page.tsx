@@ -37,11 +37,11 @@ export default function AgentTonmoy() {
       className="min-h-screen relative"
       style={{
         background: `linear-gradient(135deg, 
-          rgb(97, 207, 90) 0%, 
-          rgb(99, 173, 88) 25%, 
-          rgb(80, 134, 76) 50%, 
-          rgb(62, 106, 61) 75%, 
-          rgb(59, 75, 51) 100%)`,
+          #149414 0%, 
+          #0e6b0e 25%, 
+          #649568 50%, 
+          #9ccc9c 75%, 
+          #2b5329 100%)`,
       }}
     >
       {/* full-page matrix background (your existing component) */}
@@ -50,7 +50,7 @@ export default function AgentTonmoy() {
       <div className="relative z-10 p-2 sm:p-4 lg:p-6">
         <div className="mx-auto max-w-7xl">
           {/* framed shell */}
-          <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-gray-700 via-gray-600 to-gray-500 p-0.5 sm:p-1 shadow-2xl">
+          <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#149414] via-[#0e6b0e] to-[#649568] p-0.5 sm:p-1 shadow-2xl">
             {/* top notch */}
             <div className="flex justify-between items-center px-4 sm:px-8 py-2 sm:py-4">
               <div className="w-16 sm:w-32" />
@@ -70,7 +70,7 @@ export default function AgentTonmoy() {
             </div>
 
             {/* inner panel (now clips the MatrixFrameBG) */}
-            <div className="relative overflow-hidden min-h-[600px] sm:min-h-[700px] rounded-xl sm:rounded-2xl mx-1 sm:mx-2 mb-1 sm:mb-2 bg-gradient-to-br from-gray-800 via-gray-900 to-black">
+            <div className="relative overflow-hidden min-h-[600px] sm:min-h-[700px] rounded-xl sm:rounded-2xl mx-1 sm:mx-2 mb-1 sm:mb-2 bg-gradient-to-br from-[#149414] via-[#0e6b0e] to-[#649568]">
               {/* animated matrix inside frame */}
               <MatrixFrameBG className="absolute inset-0 opacity-20 pointer-events-none" />
 
